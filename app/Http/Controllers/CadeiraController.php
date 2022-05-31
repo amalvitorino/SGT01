@@ -24,7 +24,7 @@ class CadeiraController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadeiras.registar');
     }
 
     /**
@@ -35,7 +35,8 @@ class CadeiraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cadeira::create(Request()->all());
+        return redirect('/cadeiras.index');
     }
 
     /**

@@ -5,22 +5,43 @@ namespace App\Http\Controllers;
 use App\Models\Cadeira;
 use App\Models\Trabalho;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class TrabalhoController extends Controller
 {
 
-    public function ver()
+    public function ver(Request $request)
     {
-        return view('trabalhos.index', ['trabalho' => Trabalho::all()]);
-    }
+        //montando a consulta
+        $trabalhos = DB::table('trabalhos');
 
-    public function reg()
-    {
-        return view('trabalhos.registar',['cadeira' => Cadeira::all()]);
+        //pegando dados do request
+        $cadeira = $request->cadeira;
+        $estado = $request->estado;
+
+        //filtro de cadeira
+        if ($request->cadeira) {
+            $trabalhos->where('cadeira', $cadeira);
+        }
+
+        //filtro de estado
+        if ($request->estado) {
+            $trabalhos->where('estado', $estado);
+        }
+
+        //pegando os dados da consulta
+        $trabalhos = $trabalhos->get();
+
+        return view('trabalhos.index', compact('trabalhos', 'cadeira', 'estado'), ['cadeiras' => Cadeira::all()]);
     }
 
     public function create()
+    {
+        return view('trabalhos.registar', ['cadeira' => Cadeira::all()]);
+    }
+
+    public function store()
     {
         Request()->validate([
             'cadeira' => 'required',
@@ -32,7 +53,7 @@ class TrabalhoController extends Controller
 
     public function edit(Trabalho $trabalho)
     {
-        return view('trabalhos.editar', ['trabalho' => $trabalho]);
+        return view('trabalhos.editar', compact('trabalho'));
     }
 
     public function actualizar(Trabalho $trabalho)
