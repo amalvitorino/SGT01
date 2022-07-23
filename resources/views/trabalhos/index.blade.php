@@ -1,4 +1,4 @@
-@extends('trabalhos.layout')
+@extends('layout.dashboard')
 @section('title','SGT-Trabalhos')
 @section('content')
 
@@ -31,7 +31,7 @@
 <div class="container">
 
     <!-- Filtros de pesquisas -->
-    <section class="section">
+    <section class="section mt-5">
         <form action="/trabalhos" method="GET">
             <div class="row valign-wrapper">
                 <div class="col-3">
@@ -57,14 +57,13 @@
                     <a href="/trabalhos" class="btn ">Mostrar todos</a>
                     <button class="btn btn-primary" type="submit">Pesquisar</button>
                 </div>
-                
-
             </div>
         </form>
     </section>
 
     <!--Lista de Trabalhos-->
-    <section class="section">
+    <section class="section mt-5">
+        <a class="btn btn-success" href="{{('/trabalhos/registar')}}">Registar</a>
         <table class="table table-hover my-3">
             <thead>
                 <tr>

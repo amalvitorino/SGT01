@@ -1,4 +1,4 @@
-@extends('trabalhos.layout')
+@extends('layout.dashboard')
 
 @section('title','SGT-Registar')
 
@@ -18,7 +18,7 @@
                 <option value="{{$c->nome}}">{{$c->nome}}</option>
                 @endforeach
             </select>
-            
+
         </div>
 
         <div class="form-group">

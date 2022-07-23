@@ -1,9 +1,14 @@
-@extends('cadeiras.layout')
+@extends('layout.dashboard')
+
+
+
 @section('content')
+
 <div class="container">
-    <div class="row">
+
+    <div class="row mt-5">
         <div class="col">
-            <h1 class="text-danger">Cadeiras page is here</h1>
+            <a class="btn btn-success" href="{{('#')}}">Registar</a>
             <table class="table table-hover my-3">
                 <thead>
                     <tr>

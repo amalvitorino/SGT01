@@ -1,4 +1,4 @@
-@extends('trabalhos.layout')
+@extends('layout.dashboard')
 @section('title','SGT-Editar')
 @section('content')
 <div class="container col-5">
