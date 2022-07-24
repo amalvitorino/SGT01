@@ -21,8 +21,10 @@ Route::get('/trabalhos/pesquisar',[TrabalhoController::class,'pesquisar']);
 
 //Cadeira
 Route::get('/cadeiras',[CadeiraController::class,'index']);
-Route::get('/cadeiras/registar',[CadeiraController::class,'create']);
-Route::post('/cadeiras/registar',[CadeiraController::class,'store']);
+Route::post('/cadeiras',[CadeiraController::class,'store']);
+Route::get('/cadeiras/eliminar/{cadeira}',[CadeiraController::class,'destroy']);
+Route::get('/cadeiras/editar/{cadeira}',[CadeiraController::class,'edit']);
+Route::post('/cadeiras/editar',[CadeiraController::class,'update']);
 
 //usuario
 Route::get('/user/{user}',[UserController::class,'show']);

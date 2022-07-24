@@ -7,80 +7,51 @@ use Illuminate\Http\Request;
 
 class CadeiraController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('cadeiras.index',['cadeira'=>Cadeira::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('cadeiras.registar');
+        return view('cadeiras');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
         Cadeira::create(Request()->all());
-        return redirect('/cadeiras.index');
+        session()->flash('msg', 'Cadeira criada com sucesso');
+        return redirect('/cadeiras');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cadeira  $cadeira
-     * @return \Illuminate\Http\Response
-     */
     public function show(Cadeira $cadeira)
     {
-        //
+        return redirect('/cadeiras',compact('cadeira'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cadeira  $cadeira
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Cadeira $cadeira)
     {
-        //
+
+        return response()->json([
+            'status'=>200,
+            'cadeira'=>$cadeira,
+        ]) ;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cadeira  $cadeira
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cadeira $cadeira)
+    public function update()
     {
-        //
+        $cadeira = Cadeira::find(Request()->cadeira_id);
+        $cadeira->update(Request()->all());
+        session()->flash('msg','categoria actualizada com sucesso');
+        return redirect('/cadeiras');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cadeira  $cadeira
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Cadeira $cadeira)
     {
-        //
+        $cadeira->delete();
+        session()->flash('msg','cadeira eliminada com sucesso');
+        return redirect('/cadeiras');
     }
 }
